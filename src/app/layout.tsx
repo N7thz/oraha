@@ -27,11 +27,18 @@ export default function RootLayout({
 }>) {
 	return (
 		<>
-			<html lang="ptBR" suppressHydrationWarning className={cn("font-sans", geist.variable)}>
+			<html
+				lang="ptBR"
+				suppressHydrationWarning
+				className={cn("font-sans", geist.variable)}
+			>
 				<head />
 				<body className={`${josefinSans.className} relative`}>
 					<QueryProvider>
-						<ThemeProvider attribute="class" defaultTheme="system">
+						<ThemeProvider
+							attribute="class"
+							defaultTheme="system"
+						>
 							<DotPattern className="fixed -z-10 text-foreground/15" />
 							<TooltipProvider>{children}</TooltipProvider>
 							<Toaster />

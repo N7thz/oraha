@@ -8,19 +8,39 @@ import { Button } from "@/components/ui/button"
 import { XIcon } from "lucide-react"
 
 function Sheet({ ...props }: SheetPrimitive.Root.Props) {
-	return <SheetPrimitive.Root data-slot="sheet" {...props} />
+	return (
+		<SheetPrimitive.Root
+			data-slot="sheet"
+			{...props}
+		/>
+	)
 }
 
 function SheetTrigger({ ...props }: SheetPrimitive.Trigger.Props) {
-	return <SheetPrimitive.Trigger data-slot="sheet-trigger" {...props} />
+	return (
+		<SheetPrimitive.Trigger
+			data-slot="sheet-trigger"
+			{...props}
+		/>
+	)
 }
 
 function SheetClose({ ...props }: SheetPrimitive.Close.Props) {
-	return <SheetPrimitive.Close data-slot="sheet-close" {...props} />
+	return (
+		<SheetPrimitive.Close
+			data-slot="sheet-close"
+			{...props}
+		/>
+	)
 }
 
 function SheetPortal({ ...props }: SheetPrimitive.Portal.Props) {
-	return <SheetPrimitive.Portal data-slot="sheet-portal" {...props} />
+	return (
+		<SheetPrimitive.Portal
+			data-slot="sheet-portal"
+			{...props}
+		/>
+	)
 }
 
 function SheetOverlay({ className, ...props }: SheetPrimitive.Backdrop.Props) {
@@ -62,7 +82,13 @@ function SheetContent({
 				{showCloseButton && (
 					<SheetPrimitive.Close
 						data-slot="sheet-close"
-						render={<Button variant="ghost" className="absolute top-3 right-3" size="icon-sm" />}
+						render={
+							<Button
+								variant="ghost"
+								className="absolute top-3 right-3"
+								size="icon-sm"
+							/>
+						}
 					>
 						<XIcon />
 						<span className="sr-only">Close</span>
@@ -97,13 +123,19 @@ function SheetTitle({ className, ...props }: SheetPrimitive.Title.Props) {
 	return (
 		<SheetPrimitive.Title
 			data-slot="sheet-title"
-			className={cn("font-heading text-base font-medium text-foreground", className)}
+			className={cn(
+				"font-heading text-base font-medium text-foreground",
+				className,
+			)}
 			{...props}
 		/>
 	)
 }
 
-function SheetDescription({ className, ...props }: SheetPrimitive.Description.Props) {
+function SheetDescription({
+	className,
+	...props
+}: SheetPrimitive.Description.Props) {
 	return (
 		<SheetPrimitive.Description
 			data-slot="sheet-description"

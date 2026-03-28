@@ -92,7 +92,9 @@ export function DotPattern({
 
 	const dots = Array.from(
 		{
-			length: Math.ceil(dimensions.width / width) * Math.ceil(dimensions.height / height),
+			length:
+				Math.ceil(dimensions.width / width) *
+				Math.ceil(dimensions.height / height),
 		},
 		(_, i) => {
 			const col = i % Math.ceil(dimensions.width / width)
@@ -118,8 +120,16 @@ export function DotPattern({
 		>
 			<defs>
 				<radialGradient id={`${id}-gradient`}>
-					<stop offset="0%" stopColor="currentColor" stopOpacity="1" />
-					<stop offset="100%" stopColor="currentColor" stopOpacity="0" />
+					<stop
+						offset="0%"
+						stopColor="currentColor"
+						stopOpacity="1"
+					/>
+					<stop
+						offset="100%"
+						stopColor="currentColor"
+						stopOpacity="0"
+					/>
 				</radialGradient>
 			</defs>
 			{dots.map((dot) => (
