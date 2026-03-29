@@ -1,0 +1,23 @@
+enum WalletType {
+  CHECKING // Conta Corrente
+  SAVINGS // Poupança
+  CREDIT_CARD // Cartão de Crédito
+  CASH // Dinheiro
+  INVESTMENT // Investimento
+  PIX //Pix
+}
+
+model Wallet {
+  id                    String                 @id @default(uuid())
+  userId                String
+  user                  User                   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  name                  String
+  type                  WalletType
+  balance               Int                    @default(0)
+  transactions          Transaction[]
+  recurringTransactions RecurringTransaction[]
+  createdAt             DateTime               @default(now())
+  updatedAt             DateTime               @updatedAt
+
+  @@map("wallet")
+}

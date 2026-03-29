@@ -18,32 +18,47 @@ export { Prisma }
 export * as $Enums from './enums'
 export * from './enums';
 /**
- * Model User
+ * Model Account
  * 
  */
-export type User = Prisma.UserModel
+export type Account = Prisma.AccountModel
 /**
- * Model FinancialConnection
+ * Model InstallmentGroup
  * 
  */
-export type FinancialConnection = Prisma.FinancialConnectionModel
+export type InstallmentGroup = Prisma.InstallmentGroupModel
 /**
- * Model TwoFactor
+ * Model RecurringTransaction
  * 
  */
-export type TwoFactor = Prisma.TwoFactorModel
+export type RecurringTransaction = Prisma.RecurringTransactionModel
 /**
  * Model Session
  * 
  */
 export type Session = Prisma.SessionModel
 /**
- * Model Account
+ * Model Transaction
  * 
  */
-export type Account = Prisma.AccountModel
+export type Transaction = Prisma.TransactionModel
+/**
+ * Model TwoFactor
+ * 
+ */
+export type TwoFactor = Prisma.TwoFactorModel
+/**
+ * Model User
+ * 
+ */
+export type User = Prisma.UserModel
 /**
  * Model Verification
  * 
  */
 export type Verification = Prisma.VerificationModel
+/**
+ * Model Wallet
+ * 
+ */
+export type Wallet = Prisma.WalletModel

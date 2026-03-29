@@ -11,7 +11,7 @@ import {
 	SidebarMenuButton,
 	SidebarMenuItem,
 	SidebarProvider,
-	SidebarTrigger
+	SidebarTrigger,
 } from "@/components/ui/sidebar"
 import {
 	ArrowLeftRightIcon,
@@ -20,13 +20,14 @@ import {
 	WalletIcon,
 } from "lucide-react"
 import { SidebarSignOutButton } from "@/components/sidebar-sign-out-button"
+import { AnimatedThemeToggler } from "@/components/ui/animated-theme-toggler"
 import Link from "next/link"
 
 const navItems = [
 	{
 		label: "Dashboard",
 		href: "/dashboard",
-		icon: LayoutDashboardIcon
+		icon: LayoutDashboardIcon,
 	},
 	{
 		label: "Transações",
@@ -34,9 +35,9 @@ const navItems = [
 		icon: ArrowLeftRightIcon,
 	},
 	{
-		label: "Contas",
-		href: "/dashboard/accounts",
-		icon: WalletIcon
+		label: "Carteiras",
+		href: "/dashboard/wallets",
+		icon: WalletIcon,
 	},
 ]
 
@@ -82,10 +83,9 @@ export default function DashboardLayout({
 			<SidebarInset>
 				<header className="flex h-12 items-center gap-2 px-4 border-b">
 					<SidebarTrigger />
+					<AnimatedThemeToggler className="ml-auto flex size-8 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:bg-accent hover:text-accent-foreground [&_svg]:size-4" />
 				</header>
-				<main className="flex flex-1 flex-col gap-6 p-6">
-					{children}
-				</main>
+				<main className="flex flex-1 flex-col gap-6 p-6">{children}</main>
 			</SidebarInset>
 		</SidebarProvider>
 	)

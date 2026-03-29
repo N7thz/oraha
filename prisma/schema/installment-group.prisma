@@ -1,0 +1,10 @@
+model InstallmentGroup {
+  id           String        @id @default(uuid())
+  userId       String
+  user         User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+  total        Int
+  transactions Transaction[]
+  createdAt    DateTime      @default(now())
+
+  @@map("installment_group")
+}

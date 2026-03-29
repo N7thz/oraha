@@ -10,7 +10,6 @@ export function SidebarSignOutButton() {
 	const router = useRouter()
 
 	async function handleSignOut() {
-		
 		const { error } = await authClient.signOut()
 
 		if (error) {

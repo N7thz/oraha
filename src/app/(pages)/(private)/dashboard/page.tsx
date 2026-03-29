@@ -1,23 +1,25 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { ImportSpreadsheetButton } from "@/components/import-spreadsheet-button"
+import { CreateTransactionDialog } from "@/components/create-transaction-dialog"
+import { formatBRL } from "@/lib/money"
 import { TrendingUpIcon, TrendingDownIcon, WalletIcon } from "lucide-react"
 
 const summaryCards = [
 	{
 		title: "Saldo Total",
-		value: "R$ 0,00",
+		value: formatBRL(0),
 		icon: WalletIcon,
 		description: "Soma de todas as contas",
 	},
 	{
 		title: "Receitas",
-		value: "R$ 0,00",
+		value: formatBRL(0),
 		icon: TrendingUpIcon,
 		description: "Este mês",
 	},
 	{
 		title: "Despesas",
-		value: "R$ 0,00",
+		value: formatBRL(0),
 		icon: TrendingDownIcon,
 		description: "Este mês",
 	},
@@ -33,7 +35,10 @@ export default function DashboardPage() {
 						Visão geral das suas finanças
 					</p>
 				</div>
-				<ImportSpreadsheetButton />
+				<div className="flex items-center gap-2">
+					<CreateTransactionDialog />
+					<ImportSpreadsheetButton />
+				</div>
 			</div>
 			<div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
 				{summaryCards.map((card) => (

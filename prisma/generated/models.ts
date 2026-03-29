@@ -8,10 +8,13 @@
  *
  * 🟢 You can import this file directly.
  */
-export type * from './models/User'
-export type * from './models/FinancialConnection'
-export type * from './models/TwoFactor'
-export type * from './models/Session'
 export type * from './models/Account'
+export type * from './models/InstallmentGroup'
+export type * from './models/RecurringTransaction'
+export type * from './models/Session'
+export type * from './models/Transaction'
+export type * from './models/TwoFactor'
+export type * from './models/User'
 export type * from './models/Verification'
+export type * from './models/Wallet'
 export type * from './commonInputTypes'

@@ -1,0 +1,19 @@
+model RecurringTransaction {
+  id             String              @id @default(uuid())
+  userId         String
+  user           User                @relation(fields: [userId], references: [id], onDelete: Cascade)
+  walletId       String?
+  wallet         Wallet?             @relation(fields: [walletId], references: [id], onDelete: SetNull)
+  type           TransactionType
+  category       TransactionCategory
+  customCategory String?
+  amount         Decimal
+  description    String?
+  dayOfMonth     Int
+  active         Boolean             @default(true)
+  transactions   Transaction[]
+  createdAt      DateTime            @default(now())
+  updatedAt      DateTime            @updatedAt
+
+  @@map("recurring_transaction")
+}

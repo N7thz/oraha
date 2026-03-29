@@ -1,0 +1,41 @@
+enum TransactionType {
+  INCOME // Receita
+  EXPENSE // Despesa
+}
+
+enum TransactionCategory {
+  FOOD // Alimentação
+  TRANSPORT // Transporte
+  HEALTH // Saúde
+  EDUCATION // Educação
+  ENTERTAINMENT // Entretenimento
+  HOUSING // Moradia
+  CLOTHING // Vestuário
+  UTILITIES // Contas/Utilidades
+  SALARY // Salário
+  INVESTMENT // Investimento
+  OTHER // Outro
+}
+
+model Transaction {
+  id                 String                @id @default(uuid())
+  userId             String
+  user               User                  @relation(fields: [userId], references: [id], onDelete: Cascade)
+  walletId           String?
+  wallet             Wallet?               @relation(fields: [walletId], references: [id], onDelete: SetNull)
+  type               TransactionType
+  category           TransactionCategory
+  customCategory     String?
+  amount             Int
+  description        String?
+  date               DateTime
+  recurringId        String?
+  recurring          RecurringTransaction? @relation(fields: [recurringId], references: [id], onDelete: SetNull)
+  installmentGroupId String?
+  installmentGroup   InstallmentGroup?     @relation(fields: [installmentGroupId], references: [id], onDelete: SetNull)
+  installmentNumber  Int?
+  createdAt          DateTime              @default(now())
+  updatedAt          DateTime              @updatedAt
+
+  @@map("transaction")
+}

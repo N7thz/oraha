@@ -5,14 +5,12 @@ import { Toaster } from "@/components/ui/sonner"
 import { TooltipProvider } from "@/components/ui/tooltip"
 import { cn } from "@/lib/utils"
 import type { Metadata } from "next"
-import { Geist, Josefin_Sans } from "next/font/google"
+import { Josefin_Sans } from "next/font/google"
 import "./globals.css"
 
-const geist = Geist({ subsets: ["latin"], variable: "--font-sans" })
-
 const josefinSans = Josefin_Sans({
-	variable: "--font-josefin-sans",
 	subsets: ["latin"],
+	variable: "--font-sans",
 })
 
 export const metadata: Metadata = {
@@ -30,10 +28,10 @@ export default function RootLayout({
 			<html
 				lang="ptBR"
 				suppressHydrationWarning
-				className={cn("font-sans", geist.variable)}
+				className={cn("font-sans", josefinSans.variable)}
 			>
 				<head />
-				<body className={`${josefinSans.className} relative`}>
+				<body className="relative">
 					<QueryProvider>
 						<ThemeProvider
 							attribute="class"
