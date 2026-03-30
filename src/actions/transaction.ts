@@ -5,6 +5,17 @@ import { auth } from "@/lib/auth"
 import { prisma } from "@/lib/prisma"
 import { headers } from "next/headers"
 
+export async function getTransactions() {
+	const session = await auth.api.getSession({ headers: await headers() })
+
+	if (!session?.user) return []
+
+	return prisma.transaction.findMany({
+		where: { userId: session.user.id },
+		orderBy: [{ date: "desc" }, { id: "desc" }],
+	})
+}
+
 export async function createTransaction(data: unknown) {
 
 	const session = await auth.api.getSession({ headers: await headers() })
