@@ -1,29 +1,8 @@
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { ImportSpreadsheetButton } from "@/components/import-spreadsheet-button"
 import { CreateTransactionDialog } from "@/components/create-transaction-dialog"
-import { formatBRL } from "@/lib/money"
-import { TrendingUpIcon, TrendingDownIcon, WalletIcon } from "lucide-react"
-
-const summaryCards = [
-	{
-		title: "Saldo Total",
-		value: formatBRL(0),
-		icon: WalletIcon,
-		description: "Soma de todas as contas",
-	},
-	{
-		title: "Receitas",
-		value: formatBRL(0),
-		icon: TrendingUpIcon,
-		description: "Este mês",
-	},
-	{
-		title: "Despesas",
-		value: formatBRL(0),
-		icon: TrendingDownIcon,
-		description: "Este mês",
-	},
-]
+import { ImportSpreadsheetButton } from "@/components/import-spreadsheet-button"
+import { CategoryChart } from "@/components/dashboard/category-chart"
+import { MonthlyChart } from "@/components/dashboard/monthly-chart"
+import { SummaryCards } from "@/components/dashboard/summary-cards"
 
 export default function DashboardPage() {
 	return (
@@ -40,25 +19,14 @@ export default function DashboardPage() {
 					<ImportSpreadsheetButton />
 				</div>
 			</div>
-			<div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
-				{summaryCards.map((card) => (
-					<Card key={card.title}>
-						<CardHeader>
-							<div className="flex items-center justify-between">
-								<CardTitle className="text-sm font-medium text-muted-foreground">
-									{card.title}
-								</CardTitle>
-								<card.icon className="size-4 text-muted-foreground" />
-							</div>
-						</CardHeader>
-						<CardContent>
-							<p className="text-2xl font-semibold">{card.value}</p>
-							<p className="mt-1 text-xs text-muted-foreground">
-								{card.description}
-							</p>
-						</CardContent>
-					</Card>
-				))}
+
+			<SummaryCards />
+
+			<div className="grid grid-cols-1 gap-4 lg:grid-cols-3">
+				<div className="lg:col-span-2">
+					<MonthlyChart />
+				</div>
+				<CategoryChart />
 			</div>
 		</>
 	)
