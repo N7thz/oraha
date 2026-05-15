@@ -1,22 +1,5 @@
 "use client"
 
-import { Button } from "@/components/ui/button"
-import {
-	Card,
-	CardContent,
-	CardDescription,
-	CardFooter,
-	CardHeader,
-	CardTitle,
-} from "@/components/ui/card"
-import { Input } from "@/components/ui/input"
-import {
-	InputGroup,
-	InputGroupAddon,
-	InputGroupButton,
-	InputGroupInput,
-} from "@/components/ui/input-group"
-import { Label } from "@/components/ui/label"
 import { authClient } from "@/lib/auth-client"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { EyeIcon, EyeOffIcon } from "lucide-react"
@@ -47,76 +30,158 @@ export default function SignInPage() {
 
 	async function onSubmit({ email, password }: FormValues) {
 		const { error } = await authClient.signIn.email({ email, password })
-
 		if (error) {
 			toast.error(error.message ?? "Credenciais inválidas.")
 			return
 		}
-
 		router.push("/dashboard")
 	}
 
 	return (
-		<div className="flex min-h-dvh items-center justify-center px-4">
-			<Card className="w-1/3">
-				<CardHeader>
-					<CardTitle>Entrar</CardTitle>
-					<CardDescription>Acesse sua conta para continuar.</CardDescription>
-				</CardHeader>
-				<form onSubmit={handleSubmit(onSubmit)}>
-					<CardContent className="flex flex-col gap-4">
+		<div className="relative flex min-h-dvh items-center justify-center overflow-hidden bg-[#06100d] px-4">
+			{/* Ambient glows */}
+			<div
+				aria-hidden
+				className="pointer-events-none absolute left-0 top-0 h-[500px] w-[500px] -translate-x-1/3 -translate-y-1/3 rounded-full opacity-30"
+				style={{
+					background:
+						"radial-gradient(circle, #4bde7c22 0%, transparent 70%)",
+				}}
+			/>
+			<div
+				aria-hidden
+				className="pointer-events-none absolute bottom-0 right-0 h-[400px] w-[400px] translate-x-1/3 translate-y-1/3 rounded-full opacity-20"
+				style={{
+					background:
+						"radial-gradient(circle, #4bde7c18 0%, transparent 70%)",
+				}}
+			/>
+
+			<div className="relative z-10 flex w-full max-w-[360px] flex-col items-center gap-10">
+				{/* Wordmark */}
+				<div className="flex flex-col items-center gap-1 text-center">
+					<h1
+						className="font-display text-6xl italic tracking-tight"
+						style={{ color: "#dff2e8" }}
+					>
+						Oraha.
+					</h1>
+					<p
+						className="text-[0.7rem] uppercase tracking-[0.22em]"
+						style={{ color: "#547066" }}
+					>
+						Gestão financeira pessoal
+					</p>
+				</div>
+
+				{/* Form card */}
+				<div
+					className="w-full rounded-2xl p-6"
+					style={{
+						background: "rgba(12, 26, 18, 0.85)",
+						border: "1px solid #1b2d22",
+						backdropFilter: "blur(12px)",
+					}}
+				>
+					<form
+						onSubmit={handleSubmit(onSubmit)}
+						className="flex flex-col gap-4"
+					>
+						{/* Email */}
 						<div className="flex flex-col gap-1.5">
-							<Label htmlFor="email">E-mail</Label>
-							<Input
+							<label
+								htmlFor="email"
+								className="text-xs font-medium uppercase tracking-widest"
+								style={{ color: "#547066" }}
+							>
+								E-mail
+							</label>
+							<input
 								id="email"
 								type="email"
+								autoComplete="email"
 								placeholder="seu@email.com"
 								{...register("email")}
+								className="h-10 w-full rounded-lg px-3 text-sm outline-none transition-colors focus:ring-1"
+								style={{
+									background: "#111e17",
+									border: "1px solid #1b2d22",
+									color: "#dff2e8",
+								}}
 							/>
 							{errors.email && (
-								<p className="text-sm text-destructive">
+								<p className="text-xs" style={{ color: "#f87185" }}>
 									{errors.email.message}
 								</p>
 							)}
 						</div>
+
+						{/* Password */}
 						<div className="flex flex-col gap-1.5">
-							<Label htmlFor="password">Senha</Label>
-							<InputGroup>
-								<InputGroupInput
+							<label
+								htmlFor="password"
+								className="text-xs font-medium uppercase tracking-widest"
+								style={{ color: "#547066" }}
+							>
+								Senha
+							</label>
+							<div className="relative">
+								<input
 									id="password"
 									type={showPassword ? "text" : "password"}
+									autoComplete="current-password"
 									placeholder="••••••••"
 									{...register("password")}
+									className="h-10 w-full rounded-lg px-3 pr-10 text-sm outline-none transition-colors focus:ring-1"
+									style={{
+										background: "#111e17",
+										border: "1px solid #1b2d22",
+										color: "#dff2e8",
+									}}
 								/>
-								<InputGroupAddon align="inline-end">
-									<InputGroupButton
-										onClick={() => setShowPassword((v) => !v)}
-										aria-label={
-											showPassword ? "Ocultar senha" : "Mostrar senha"
-										}
-									>
-										{showPassword ? <EyeOffIcon /> : <EyeIcon />}
-									</InputGroupButton>
-								</InputGroupAddon>
-							</InputGroup>
+								<button
+									type="button"
+									onClick={() => setShowPassword((v) => !v)}
+									className="absolute right-3 top-1/2 -translate-y-1/2 transition-opacity hover:opacity-70"
+									style={{ color: "#547066" }}
+									aria-label={showPassword ? "Ocultar senha" : "Mostrar senha"}
+								>
+									{showPassword ? (
+										<EyeOffIcon className="size-4" />
+									) : (
+										<EyeIcon className="size-4" />
+									)}
+								</button>
+							</div>
 							{errors.password && (
-								<p className="text-sm text-destructive">
+								<p className="text-xs" style={{ color: "#f87185" }}>
 									{errors.password.message}
 								</p>
 							)}
 						</div>
-					</CardContent>
-					<CardFooter>
-						<Button
+
+						{/* Submit */}
+						<button
 							type="submit"
-							className="w-full"
 							disabled={isSubmitting}
+							className="mt-2 h-10 w-full rounded-lg text-sm font-semibold tracking-wide transition-all disabled:opacity-50"
+							style={{
+								background: isSubmitting ? "#2da05a" : "#4bde7c",
+								color: "#06100d",
+							}}
 						>
 							{isSubmitting ? "Entrando..." : "Entrar"}
-						</Button>
-					</CardFooter>
-				</form>
-			</Card>
+						</button>
+					</form>
+				</div>
+
+				<p
+					className="text-center text-[0.65rem] uppercase tracking-[0.18em]"
+					style={{ color: "#2d4a38" }}
+				>
+					Suas finanças. Seu controle.
+				</p>
+			</div>
 		</div>
 	)
 }
