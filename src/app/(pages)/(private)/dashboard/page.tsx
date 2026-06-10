@@ -14,7 +14,7 @@ export default function DashboardPage() {
 						Visão geral das suas finanças
 					</p>
 				</div>
-				<div className="flex items-center gap-2">
+				<div className="flex items-center gap-2" data-tour="create-transaction">
 					<CreateTransactionDialog />
 					<ImportSpreadsheetButton />
 				</div>
@@ -23,10 +23,12 @@ export default function DashboardPage() {
 			<SummaryCards />
 
 			<div className="grid grid-cols-1 gap-4 lg:grid-cols-3">
-				<div className="lg:col-span-2">
+				<div className="lg:col-span-2" data-tour="monthly-chart">
 					<MonthlyChart />
 				</div>
-				<CategoryChart />
+				<div data-tour="category-chart">
+					<CategoryChart />
+				</div>
 			</div>
 		</>
 	)

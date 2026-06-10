@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useMemo } from "react"
+import { useState, useMemo, useCallback } from "react"
 import { motion, AnimatePresence } from "motion/react"
 import {
 	ArrowLeftRightIcon,
@@ -9,12 +9,16 @@ import {
 	FileSpreadsheetIcon,
 	HelpCircleIcon,
 	LayoutDashboardIcon,
+	PlayIcon,
 	RepeatIcon,
 	SearchIcon,
 	SettingsIcon,
 	ShieldCheckIcon,
 	WalletIcon,
 } from "lucide-react"
+import { useRouter } from "next/navigation"
+import { DemoSection } from "@/components/demos"
+import { useTour } from "@/components/tour"
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 
@@ -397,6 +401,13 @@ const QUICK_START = [
 
 export default function HelpPage() {
 	const [query, setQuery] = useState("")
+	const { start } = useTour()
+	const router = useRouter()
+
+	const handleStartTour = useCallback(() => {
+		start()
+		router.push("/dashboard")
+	}, [start, router])
 
 	const totalResults = useMemo(() => {
 		if (!query) return null
@@ -423,13 +434,46 @@ export default function HelpPage() {
 						Guias, fluxos e perguntas frequentes
 					</p>
 				</div>
-				<div
-					className="flex size-10 items-center justify-center rounded-xl"
-					style={{ background: "rgba(75,222,124,0.1)" }}
-				>
-					<BookOpenIcon className="size-5" style={{ color: "#4bde7c" }} />
+				<div className="flex items-center gap-3">
+					<button
+						type="button"
+						onClick={handleStartTour}
+						className="flex items-center gap-2 rounded-xl px-3 py-2 text-xs font-medium transition-opacity hover:opacity-80"
+						style={{
+							background: "rgba(75,222,124,0.12)",
+							color: "#4bde7c",
+							border: "1px solid rgba(75,222,124,0.2)",
+						}}
+					>
+						<PlayIcon className="size-3" />
+						Reiniciar tour
+					</button>
+					<div
+						className="flex size-10 items-center justify-center rounded-xl"
+						style={{ background: "rgba(75,222,124,0.1)" }}
+					>
+						<BookOpenIcon className="size-5" style={{ color: "#4bde7c" }} />
+					</div>
 				</div>
 			</div>
+
+			{/* Interactive Demos */}
+			{!query && (
+				<div>
+					<p className="mb-3 text-xs font-medium uppercase tracking-widest text-muted-foreground">
+						Demonstrações interativas
+					</p>
+					<div
+						className="rounded-xl p-4"
+						style={{
+							background: "var(--card)",
+							border: "1px solid var(--border)",
+						}}
+					>
+						<DemoSection />
+					</div>
+				</div>
+			)}
 
 			{/* Search */}
 			<div className="relative">

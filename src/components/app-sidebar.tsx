@@ -24,11 +24,11 @@ import Link from "next/link"
 import { usePathname } from "next/navigation"
 
 const navItems = [
-	{ label: "Dashboard", href: "/dashboard", icon: LayoutDashboardIcon, exact: true },
-	{ label: "Transações", href: "/dashboard/transactions", icon: ArrowLeftRightIcon },
-	{ label: "Carteiras", href: "/dashboard/wallets", icon: WalletIcon },
-	{ label: "Recorrentes", href: "/dashboard/recurring", icon: RepeatIcon },
-	{ label: "Ajuda", href: "/dashboard/help", icon: HelpCircleIcon },
+	{ label: "Dashboard", href: "/dashboard", icon: LayoutDashboardIcon, exact: true, tourId: undefined },
+	{ label: "Transações", href: "/dashboard/transactions", icon: ArrowLeftRightIcon, tourId: "nav-transactions" },
+	{ label: "Carteiras", href: "/dashboard/wallets", icon: WalletIcon, tourId: "nav-wallets" },
+	{ label: "Recorrentes", href: "/dashboard/recurring", icon: RepeatIcon, tourId: "nav-recurring" },
+	{ label: "Ajuda", href: "/dashboard/help", icon: HelpCircleIcon, tourId: "nav-help" },
 ]
 
 export function AppSidebar() {
@@ -60,6 +60,7 @@ export function AppSidebar() {
 									<SidebarMenuItem key={item.href}>
 										<Link
 											href={item.href}
+											data-tour={item.tourId}
 											className={cn(
 												"flex items-center gap-2.5 rounded-lg px-2.5 py-2 text-sm transition-all duration-150",
 												"hover:bg-sidebar-accent hover:text-sidebar-accent-foreground",
