@@ -1,8 +1,0 @@
-{
-  "name": "Oraha — Design Kit",
-  "id": "0",
-  "api": "1.0.0",
-  "main": "figma-design-kit.js",
-  "editorType": ["figma"],
-  "documentAccess": "dynamic-page"
-}
